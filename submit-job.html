@@ -119,5 +119,42 @@
                 jobData[key] = value;
             });
             
-            // Create WhatsApp message
+                       // Create WhatsApp message
             const message = `
+New Job Submission from CareerHub:
+
+*Job Title:* ${jobData.jobTitle}
+*Company:* ${jobData.company}
+*Location:* ${jobData.location}
+*Salary:* ${jobData.salary || 'Not specified'}
+*Contact Email:* ${jobData.contactEmail}
+*Phone:* ${jobData.phone || 'Not provided'}
+
+*Job Description:*
+${jobData.description}
+
+*Requirements:*
+${jobData.requirements || 'Not specified'}
+            `.trim();
+
+            // Encode message for WhatsApp URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // WhatsApp number (replace with your number)
+            const whatsappNumber = "3038776223";
+            
+            // Create WhatsApp URL
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            
+            // Redirect to WhatsApp
+            window.open(whatsappURL, '_blank');
+            
+            // Show success message
+            alert('Form submitted! You are being redirected to WhatsApp to complete the process.');
+            
+            // Optional: Reset form
+            this.reset();
+        });
+    </script>
+</body>
+</html>
